@@ -1,0 +1,12 @@
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\bin\Debug\AdminEmpleados.exe.config
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\bin\Debug\AdminEmpleados.exe
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\bin\Debug\AdminEmpleados.pdb
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\obj\Debug\AdminEmpleados.csproj.AssemblyReference.cache
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\obj\Debug\AdminEmpleados.PL.frmDepartamentos.resources
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\obj\Debug\AdminEmpleados.PL.frmEmpleados.resources
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\obj\Debug\AdminEmpleados.Properties.Resources.resources
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\obj\Debug\AdminEmpleados.csproj.GenerateResource.cache
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\obj\Debug\AdminEmpleados.csproj.CoreCompileInputs.cache
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\obj\Debug\AdminEmpleados.exe
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\obj\Debug\AdminEmpleados.pdb
+C:\Users\Jimmy\source\repos\AdminEmpleados\AdminEmpleados\obj\Debug\AdminEmpleados.frmEmpAdminMain.resources
