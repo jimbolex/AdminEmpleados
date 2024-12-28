@@ -8,5 +8,7 @@ namespace AdminEmpleados.BLL
 {
     internal class DepartamentoBLL
     {
+        public int ID { get; set; }
+        public string Departamento { get; set; }
     }
 }
