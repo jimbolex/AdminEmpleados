@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AdminEmpleados.BLL;
+using AdminEmpleados.DAL;
 
 namespace AdminEmpleados.PL
 {
@@ -20,7 +21,9 @@ namespace AdminEmpleados.PL
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            RecuperarInformacion();
+            //RecuperarInformacion();
+            Conexion conexion = new Conexion();
+            MessageBox.Show($"Connected?... {conexion.ConexionTest()}");
 
         }
 
