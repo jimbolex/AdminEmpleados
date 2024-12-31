@@ -5,23 +5,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration; //This needs also to be added in the References of the project in order to work
 
 namespace AdminEmpleados.DAL
 {
     internal class Conexion
     {
+        private string StringConn = ConfigurationManager.ConnectionStrings["AdminEmpleados"].ConnectionString; //Obtaining the string connection from the App.config
+        SqlConnection conn;
+
+        public SqlConnection EstablecerConexion()
+        {
+            this.conn = new SqlConnection(this.StringConn);
+            return this.conn;
+        }
         public bool ConexionTest()
         {
 			try
-			{
-                SqlConnection conn = new SqlConnection("Data Source=LAPTOP-S6DV4KF5;Initial Catalog=dbEmpDep1;Integrated Security=True;Encrypt=False");
+			{                
                 SqlCommand cmd = new SqlCommand();
 
                 cmd.CommandText = "SELECT * FROM Empleados";
-                cmd.Connection = conn;
-                conn.Open();
+                cmd.Connection = this.EstablecerConexion();
+                this.conn.Open();
                 cmd.ExecuteNonQuery();
-                conn.Close();
+                this.conn.Close();
 
                 return true;
             }
