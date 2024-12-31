@@ -21,20 +21,20 @@ namespace AdminEmpleados.PL
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            //RecuperarInformacion();
+            
             Conexion conexion = new Conexion();
-            MessageBox.Show($"Connected?... {conexion.ConexionTest()}");
+            if (conexion.InsertDept(RecuperarInformacion())) MessageBox.Show($"Record '{RecuperarInformacion()}' added successfully"); else MessageBox.Show($"Something went wrong. Contact Support.");
 
         }
 
-        private void RecuperarInformacion()
+        private string RecuperarInformacion()
         {
             DepartamentoBLL Departamento = new DepartamentoBLL();
-            int ID = 0; int.TryParse(txtDeptoID.Text, out ID);
-            Departamento.ID = ID;
+            //int ID = 0; int.TryParse(txtDeptoID.Text, out ID); <= delete later
+            //Departamento.ID = ID;
             Departamento.Departamento = txtDepto.Text;
 
-            MessageBox.Show($"Depto.ID: {Departamento.ID}; Nombre Depto: {Departamento.Departamento}"); // <== delete later
+            return Departamento.Departamento;
 
 
         }

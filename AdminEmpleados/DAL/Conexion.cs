@@ -19,13 +19,13 @@ namespace AdminEmpleados.DAL
             this.conn = new SqlConnection(this.StringConn);
             return this.conn;
         }
-        public bool ConexionTest()
+        public bool InsertDept(string department)
         {
 			try
 			{                
                 SqlCommand cmd = new SqlCommand();
 
-                cmd.CommandText = "SELECT * FROM Empleados";
+                cmd.CommandText = $"INSERT INTO [dbEmpDep1].[dbo].[Departamentos] (departamento) VALUES ('{department}')";
                 cmd.Connection = this.EstablecerConexion();
                 this.conn.Open();
                 cmd.ExecuteNonQuery();
