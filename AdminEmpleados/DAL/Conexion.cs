@@ -14,30 +14,35 @@ namespace AdminEmpleados.DAL
         private string StringConn = ConfigurationManager.ConnectionStrings["AdminEmpleados"].ConnectionString; //Obtaining the string connection from the App.config
         SqlConnection conn;
 
-        public SqlConnection EstablecerConexion()
+        private SqlConnection StablishConn()
         {
             this.conn = new SqlConnection(this.StringConn);
             return this.conn;
         }
-        public bool InsertDept(string department)
+        
+
+        /* Method that will process actions without data return (INSERTS, UPDATES Y DELETES) */
+        public bool execNoDataRetCMD(string strCMD)
         {
-			try
-			{                
+            try
+            {
                 SqlCommand cmd = new SqlCommand();
 
-                cmd.CommandText = $"INSERT INTO [dbEmpDep1].[dbo].[Departamentos] (departamento) VALUES ('{department}')";
-                cmd.Connection = this.EstablecerConexion();
+                cmd.CommandText = strCMD;
+                cmd.Connection = this.StablishConn();
                 this.conn.Open();
                 cmd.ExecuteNonQuery();
                 this.conn.Close();
 
                 return true;
             }
-			catch (Exception)
-			{
+            catch (Exception)
+            {
 
-				return false;
-			}        
+                return false;
+            }
         }
+
+        /* Methods that will return data from the database (SELECTS) */
     }
 }

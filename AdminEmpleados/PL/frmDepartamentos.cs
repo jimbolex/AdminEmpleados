@@ -14,29 +14,35 @@ namespace AdminEmpleados.PL
 {
     public partial class frmDepartamentos : Form
     {
+        Departamento dept;
         public frmDepartamentos()
         {
             InitializeComponent();
+            dept = new Departamento();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            if (dept.InsertDept(RecoverInfo()))
+            {
+                MessageBox.Show($"Record '{RecoverInfo().Departamento}' added successfully");
+                txtDepto.Clear();
+            }
+            else
+            {
+                MessageBox.Show($"Something went wrong. Contact Support.");
+            }
             
-            Conexion conexion = new Conexion();
-            if (conexion.InsertDept(RecuperarInformacion())) MessageBox.Show($"Record '{RecuperarInformacion()}' added successfully"); else MessageBox.Show($"Something went wrong. Contact Support.");
-
         }
 
-        private string RecuperarInformacion()
+        private DepartamentoBLL RecoverInfo()
         {
             DepartamentoBLL Departamento = new DepartamentoBLL();
-            //int ID = 0; int.TryParse(txtDeptoID.Text, out ID); <= delete later
-            //Departamento.ID = ID;
+            int ID = 0; int.TryParse(txtDeptoID.Text, out ID);
+            Departamento.ID = ID;
             Departamento.Departamento = txtDepto.Text;
 
-            return Departamento.Departamento;
-
-
+            return Departamento;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
