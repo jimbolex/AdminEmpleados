@@ -19,6 +19,7 @@ namespace AdminEmpleados.PL
         {
             InitializeComponent();
             dept = new Departamento();
+            dgvDeptos.DataSource = dept.getAllDepartments().Tables[0];
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)

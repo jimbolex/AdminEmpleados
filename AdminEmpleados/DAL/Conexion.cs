@@ -45,16 +45,16 @@ namespace AdminEmpleados.DAL
 
         /* Methods that will return data from the database (SELECTS) */
 
-        public DataSet execQuery(SqlCommand sqlCmd)
+        public DataSet execQuery(string sqlQueryCmd)
         {
             DataSet ds = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
 
             try
             {
-                SqlCommand cmd = new SqlCommand();
-                cmd = sqlCmd;
+                SqlCommand cmd = new SqlCommand(sqlQueryCmd);
                 cmd.Connection = this.StablishConn();
+                adapter.SelectCommand = cmd;
                 this.conn.Open();
                 adapter.Fill(ds);
                 this.conn.Close();
