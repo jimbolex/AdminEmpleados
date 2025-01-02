@@ -51,5 +51,12 @@ namespace AdminEmpleados.PL
         {
             this.Close();
         }
+
+        private void selectRow(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int i = e.RowIndex;
+            txtDeptoID.Text = dgvDeptos.Rows[i].Cells[0].Value.ToString();
+            txtDepto.Text = dgvDeptos.Rows[i].Cells[1].Value.ToString();
+        }
     }
 }
