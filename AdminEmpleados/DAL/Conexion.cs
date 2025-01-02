@@ -44,5 +44,28 @@ namespace AdminEmpleados.DAL
         }
 
         /* Methods that will return data from the database (SELECTS) */
+
+        public DataSet execQuery(SqlCommand sqlCmd)
+        {
+            DataSet ds = new DataSet();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd = sqlCmd;
+                cmd.Connection = this.StablishConn();
+                this.conn.Open();
+                adapter.Fill(ds);
+                this.conn.Close();
+
+                return ds;
+            }
+            catch (Exception)
+            {
+
+                return ds;
+            }
+        }
     }
 }

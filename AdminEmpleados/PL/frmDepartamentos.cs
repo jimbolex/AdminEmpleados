@@ -27,6 +27,7 @@ namespace AdminEmpleados.PL
             {
                 MessageBox.Show($"Record '{RecoverInfo().Departamento}' added successfully");
                 txtDepto.Clear();
+                txtDeptoID.Clear();
             }
             else
             {
