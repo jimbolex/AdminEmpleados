@@ -29,6 +29,7 @@ namespace AdminEmpleados.PL
                 MessageBox.Show($"Record '{RecoverInfo().Departamento}' added successfully");
                 txtDepto.Clear();
                 txtDeptoID.Clear();
+                dgvDeptos.DataSource = dept.getAllDepartments().Tables[0];
             }
             else
             {
@@ -57,6 +58,40 @@ namespace AdminEmpleados.PL
             int i = e.RowIndex;
             txtDeptoID.Text = dgvDeptos.Rows[i].Cells[0].Value.ToString();
             txtDepto.Text = dgvDeptos.Rows[i].Cells[1].Value.ToString();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record?", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                if (dept.DeleteDept(RecoverInfo()))
+                {
+                    MessageBox.Show($"Record '{RecoverInfo().Departamento}' deleted successfully");
+                    txtDepto.Clear();
+                    txtDeptoID.Clear();
+                    dgvDeptos.DataSource = dept.getAllDepartments().Tables[0];
+                }
+                else
+                {
+                    MessageBox.Show($"Something went wrong. Contact Support.");
+                }
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dept.UpdateDept(RecoverInfo()))
+            {
+                MessageBox.Show($"Record '{RecoverInfo().Departamento}' updated successfully");
+                txtDepto.Clear();
+                txtDeptoID.Clear();
+                dgvDeptos.DataSource = dept.getAllDepartments().Tables[0];
+            }
+            else
+            {
+                MessageBox.Show($"Something went wrong. Contact Support.");
+            }
         }
     }
 }
