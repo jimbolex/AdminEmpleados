@@ -19,7 +19,7 @@ namespace AdminEmpleados.PL
         {
             InitializeComponent();
             dept = new Departamento();
-            dgvDeptos.DataSource = dept.getAllDepartments().Tables[0];
+            getAllDepartments();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -29,7 +29,7 @@ namespace AdminEmpleados.PL
                 MessageBox.Show($"Record '{RecoverInfo().Departamento}' added successfully");
                 txtDepto.Clear();
                 txtDeptoID.Clear();
-                dgvDeptos.DataSource = dept.getAllDepartments().Tables[0];
+                getAllDepartments();
             }
             else
             {
@@ -70,7 +70,7 @@ namespace AdminEmpleados.PL
                     MessageBox.Show($"Record '{RecoverInfo().Departamento}' deleted successfully");
                     txtDepto.Clear();
                     txtDeptoID.Clear();
-                    dgvDeptos.DataSource = dept.getAllDepartments().Tables[0];
+                    getAllDepartments();
                 }
                 else
                 {
@@ -86,12 +86,17 @@ namespace AdminEmpleados.PL
                 MessageBox.Show($"Record '{RecoverInfo().Departamento}' updated successfully");
                 txtDepto.Clear();
                 txtDeptoID.Clear();
-                dgvDeptos.DataSource = dept.getAllDepartments().Tables[0];
+                getAllDepartments();
             }
             else
             {
                 MessageBox.Show($"Something went wrong. Contact Support.");
             }
+        }
+
+        private void getAllDepartments()
+        {
+            dgvDeptos.DataSource = dept.getAllDepartments().Tables[0];
         }
     }
 }
