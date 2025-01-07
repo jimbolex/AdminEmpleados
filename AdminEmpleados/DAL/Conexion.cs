@@ -22,13 +22,11 @@ namespace AdminEmpleados.DAL
         
 
         /* Method that will process actions without data return (INSERTS, UPDATES Y DELETES) */
-        public bool execNoDataRetCMD(string strCMD)
+        public bool execNoDataRetCMD(SqlCommand sqlCMD)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand();
-
-                cmd.CommandText = strCMD;
+                SqlCommand cmd = sqlCMD;
                 cmd.Connection = this.StablishConn();
                 this.conn.Open();
                 cmd.ExecuteNonQuery();
@@ -45,14 +43,14 @@ namespace AdminEmpleados.DAL
 
         /* Methods that will return data from the database (SELECTS) */
 
-        public DataSet execQuery(string sqlQueryCmd)
+        public DataSet execQuery(SqlCommand sqlQueryCmd)
         {
             DataSet ds = new DataSet();
             SqlDataAdapter adapter = new SqlDataAdapter();
 
             try
             {
-                SqlCommand cmd = new SqlCommand(sqlQueryCmd);
+                SqlCommand cmd = sqlQueryCmd;
                 cmd.Connection = this.StablishConn();
                 adapter.SelectCommand = cmd;
                 this.conn.Open();
