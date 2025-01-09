@@ -20,6 +20,7 @@ namespace AdminEmpleados.PL
             InitializeComponent();
             dept = new Departamento();
             getAllDepartments();
+            clearForm();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -30,6 +31,7 @@ namespace AdminEmpleados.PL
                 txtDepto.Clear();
                 txtDeptoID.Clear();
                 getAllDepartments();
+                clearForm();
             }
             else
             {
@@ -41,7 +43,8 @@ namespace AdminEmpleados.PL
         private DepartamentoBLL RecoverInfo()
         {
             DepartamentoBLL Departamento = new DepartamentoBLL();
-            int ID = 0; int.TryParse(txtDeptoID.Text, out ID);
+            int ID = 0; 
+            int.TryParse(txtDeptoID.Text, out ID);
             Departamento.ID = ID;
             Departamento.Departamento = txtDepto.Text;
 
@@ -56,8 +59,15 @@ namespace AdminEmpleados.PL
         private void selectRow(object sender, DataGridViewCellMouseEventArgs e)
         {
             int i = e.RowIndex;
-            txtDeptoID.Text = dgvDeptos.Rows[i].Cells[0].Value.ToString();
-            txtDepto.Text = dgvDeptos.Rows[i].Cells[1].Value.ToString();
+            dgvDeptos.ClearSelection();
+
+            if (i >= 0)
+            {
+                txtDeptoID.Text = dgvDeptos.Rows[i].Cells[0].Value.ToString();
+                txtDepto.Text = dgvDeptos.Rows[i].Cells[1].Value.ToString();
+                clearForm(false);
+            }
+            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -71,6 +81,7 @@ namespace AdminEmpleados.PL
                     txtDepto.Clear();
                     txtDeptoID.Clear();
                     getAllDepartments();
+                    clearForm();
                 }
                 else
                 {
@@ -87,6 +98,7 @@ namespace AdminEmpleados.PL
                 txtDepto.Clear();
                 txtDeptoID.Clear();
                 getAllDepartments();
+                clearForm();
             }
             else
             {
@@ -97,6 +109,21 @@ namespace AdminEmpleados.PL
         private void getAllDepartments()
         {
             dgvDeptos.DataSource = dept.getAllDepartments().Tables[0];
+        }
+
+        private void clearForm(bool clear = true)
+        {
+            if (clear)
+            {
+                txtDeptoID.Text = string.Empty;
+                txtDepto.Text = string.Empty;
+            }
+            
+
+            btnAgregar.Enabled = clear ? true : false;
+            btnModificar.Enabled = clear ? false : true;
+            btnEliminar.Enabled = clear ? false : true;
+            btnCancelar.Enabled = true;
         }
     }
 }
