@@ -34,6 +34,13 @@ namespace AdminEmpleados.DAL
             return conn.execQuery(query);
         }
 
+        public DataSet getUniqueDepartments()
+        {
+            SqlCommand query = new SqlCommand("SELECT distinct pkDepID as [ID], departamento as [Departamento] FROM [dbEmpDep1].[dbo].[Departamentos]");
+
+            return conn.execQuery(query);
+        }
+
         public bool DeleteDept(DepartamentoBLL oDepartment)
         {
             SqlCommand cmd = new SqlCommand("DELETE FROM [dbEmpDep1].[dbo].[Departamentos] WHERE pkDepID = @deptoID");
