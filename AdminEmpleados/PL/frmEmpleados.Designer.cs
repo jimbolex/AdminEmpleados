@@ -153,6 +153,7 @@
             this.pbEmpFoto.Location = new System.Drawing.Point(29, 44);
             this.pbEmpFoto.Name = "pbEmpFoto";
             this.pbEmpFoto.Size = new System.Drawing.Size(159, 159);
+            this.pbEmpFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbEmpFoto.TabIndex = 12;
             this.pbEmpFoto.TabStop = false;
             // 
@@ -164,6 +165,7 @@
             this.btnExaminar.TabIndex = 13;
             this.btnExaminar.Text = "Examinar...";
             this.btnExaminar.UseVisualStyleBackColor = true;
+            this.btnExaminar.Click += new System.EventHandler(this.btnExaminar_Click);
             // 
             // btnAgregar
             // 
@@ -173,6 +175,7 @@
             this.btnAgregar.TabIndex = 14;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnModificar
             // 
