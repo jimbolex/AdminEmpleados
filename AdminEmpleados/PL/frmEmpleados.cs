@@ -22,6 +22,7 @@ namespace AdminEmpleados.PL
         {
             InitializeComponent();
             emp = new Empleado();
+            clearForm();
 
         }
 
@@ -34,6 +35,23 @@ namespace AdminEmpleados.PL
             cmbDepto.ValueMember = "ID";
 
         }
+        private void clearForm(bool clear = true)
+        {
+            if (clear)
+            {
+                txtID.Clear();
+                txtNombres.Clear();
+                txtPrimerApellido.Clear();
+                txtSegundoApellido.Clear();
+                txtCorreo.Clear();
+            }
+
+
+            btnAgregar.Enabled = clear ? true : false;
+            btnModificar.Enabled = clear ? false : true;
+            btnEliminar.Enabled = clear ? false : true;
+            btnCancelar.Enabled = true;
+        }
 
         private void btnExaminar_Click(object sender, EventArgs e)
         {
@@ -44,7 +62,7 @@ namespace AdminEmpleados.PL
             {
                 pbEmpFoto.Image = Image.FromStream(selectPic.OpenFile());
 
-                //to send the image as binary to the DB
+                //prepare the image to be sent as binary to the DB
                 MemoryStream memory = new MemoryStream();
                 pbEmpFoto.Image.Save(memory, ImageFormat.Png);
 
@@ -56,11 +74,11 @@ namespace AdminEmpleados.PL
         {
             EmpleadoBLL Empleado = new EmpleadoBLL();
             int ID = 0; int.TryParse(txtID.Text, out ID);
-            int DeptoID = 0;int.TryParse(cmbDepto.ValueMember, out ID);
+            int DeptoID = 0; int.TryParse(cmbDepto.ValueMember, out ID);
             Empleado.ID = ID;
             Empleado.NombreEmpleado = txtNombres.Text;
             Empleado.PrimerApellido = txtPrimerApellido.Text;
-            Empleado.SegundoApellido = txtSegundoApellido.Text;
+            Empleado.SegundoApellido = String.IsNullOrEmpty(txtSegundoApellido.Text) ? " " : txtSegundoApellido.Text;
             Empleado.Correo = txtCorreo.Text;
             Empleado.Departamento = DeptoID;
             Empleado.FotoEmpleado = imageByte;
@@ -70,7 +88,22 @@ namespace AdminEmpleados.PL
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            emp.InsertEmpl(RecoverInfo());
+            if (emp.InsertEmpl(RecoverInfo()))
+            {
+                MessageBox.Show($"Employee: {RecoverInfo().NombreEmpleado} {RecoverInfo().PrimerApellido} added successfully.");
+                clearForm();
+               
+            }
+            else
+            {
+                MessageBox.Show($"Something went wrong. Contact Support.");
+            }
+
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            clearForm();
         }
     }
 }

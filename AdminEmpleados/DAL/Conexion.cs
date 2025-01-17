@@ -22,7 +22,7 @@ namespace AdminEmpleados.DAL
         
 
         /* Method that will process actions without data return (INSERTS, UPDATES Y DELETES) */
-        public bool execNoDataRetCMD(SqlCommand sqlCMD)
+        public bool execNonQuery(SqlCommand sqlCMD)
         {
             try
             {

@@ -26,7 +26,14 @@ namespace AdminEmpleados.DAL
             cmd.Parameters.Add("@apellido2", SqlDbType.VarChar).Value = Empl.SegundoApellido;
             cmd.Parameters.Add("@correo", SqlDbType.VarChar).Value = Empl.Correo;
             cmd.Parameters.Add("@foto", SqlDbType.Image).Value = Empl.FotoEmpleado;
-            return conn.execNoDataRetCMD(cmd);
+            return conn.execNonQuery(cmd);
+        }
+
+        public DataSet getAllEmployees()
+        {
+            SqlCommand query = new SqlCommand("SELECT [pkEmpId] as ID, [nombres] as [Nombre(s)], [apellido1] as [Primer Apellido],[apellido2] as [Segundo Apellido], [correo] as Email FROM [dbEmpDep1].[dbo].[Empleados]");
+
+            return conn.execQuery(query);
         }
     }
 }
