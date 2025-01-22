@@ -35,5 +35,27 @@ namespace AdminEmpleados.DAL
 
             return conn.execQuery(query);
         }
+
+        public bool DeleteEmp(EmpleadoBLL Empl)
+        {
+            SqlCommand cmd = new SqlCommand("DELETE FROM [dbEmpDep1].[dbo].[Empleados] WHERE pkEmpId = @EmpID");
+            cmd.Parameters.Add("@EmpID", SqlDbType.Int).Value = Empl.ID;
+            return !String.IsNullOrEmpty(Empl.ID.ToString())
+                ? conn.execNonQuery(cmd)
+                : false;
+        }
+
+        public bool UpdateEmp(EmpleadoBLL Empl)
+        {
+            SqlCommand cmd = new SqlCommand("UPDATE [dbEmpDep1].[dbo].[Empleados] SET nombres = @nombres, apellido1 = @apellido1, apellido2 = @apellido2, correo = @correo WHERE pkEmpId = @EmpID");
+            cmd.Parameters.Add("@EmpID", SqlDbType.Int).Value = Empl.ID;
+            cmd.Parameters.Add("@nombres", SqlDbType.VarChar).Value = Empl.NombreEmpleado;
+            cmd.Parameters.Add("@apellido1", SqlDbType.VarChar).Value = Empl.PrimerApellido;
+            cmd.Parameters.Add("@apellido2", SqlDbType.VarChar).Value = Empl.SegundoApellido;
+            cmd.Parameters.Add("@correo", SqlDbType.VarChar).Value = Empl.Correo;
+            return !String.IsNullOrEmpty(Empl.ID.ToString())
+                ? conn.execNonQuery(cmd)
+                : false;
+        }
     }
 }

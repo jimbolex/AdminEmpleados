@@ -23,6 +23,7 @@ namespace AdminEmpleados.PL
             InitializeComponent();
             emp = new Empleado();
             clearForm();
+            getAllEmployees();
 
         }
 
@@ -53,6 +54,11 @@ namespace AdminEmpleados.PL
             btnCancelar.Enabled = true;
         }
 
+        private void getAllEmployees()
+        {
+            dgvEmpleados.DataSource = emp.getAllEmployees().Tables[0];
+        }
+
         private void btnExaminar_Click(object sender, EventArgs e)
         {
             OpenFileDialog selectPic = new OpenFileDialog();
@@ -74,7 +80,7 @@ namespace AdminEmpleados.PL
         {
             EmpleadoBLL Empleado = new EmpleadoBLL();
             int ID = 0; int.TryParse(txtID.Text, out ID);
-            int DeptoID = 0; int.TryParse(cmbDepto.ValueMember, out ID);
+            int DeptoID = 0; int.TryParse(cmbDepto.ValueMember, out DeptoID);
             Empleado.ID = ID;
             Empleado.NombreEmpleado = txtNombres.Text;
             Empleado.PrimerApellido = txtPrimerApellido.Text;
@@ -92,6 +98,7 @@ namespace AdminEmpleados.PL
             {
                 MessageBox.Show($"Employee: {RecoverInfo().NombreEmpleado} {RecoverInfo().PrimerApellido} added successfully.");
                 clearForm();
+                getAllEmployees();
                
             }
             else
@@ -104,6 +111,54 @@ namespace AdminEmpleados.PL
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             clearForm();
+        }
+
+        private void selectRow(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int i = e.RowIndex;
+            dgvEmpleados.ClearSelection();
+
+            if (i >= 0)
+            {
+                txtID.Text = dgvEmpleados.Rows[i].Cells[0].Value.ToString();
+                txtNombres.Text = dgvEmpleados.Rows[i].Cells[1].Value.ToString();
+                txtPrimerApellido.Text = dgvEmpleados.Rows[i].Cells[2].Value.ToString();
+                txtSegundoApellido.Text = dgvEmpleados.Rows[i].Cells[3].Value.ToString();
+                txtCorreo.Text = dgvEmpleados.Rows[i].Cells[4].Value.ToString();
+                clearForm(false);
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record?", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                if (emp.DeleteEmp(RecoverInfo()))
+                {
+                    MessageBox.Show($"Record '{RecoverInfo().NombreEmpleado} {RecoverInfo().PrimerApellido}' deleted successfully");
+                    getAllEmployees();
+                    clearForm();
+                }
+                else
+                {
+                    MessageBox.Show($"Something went wrong. Contact Support.");
+                }
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (emp.UpdateEmp(RecoverInfo()))
+            {
+                MessageBox.Show($"Employee ID: '{RecoverInfo().ID}' updated successfully");
+                getAllEmployees();
+                clearForm();
+            }
+            else
+            {
+                MessageBox.Show($"Something went wrong. Contact Support.");
+            }
         }
     }
 }

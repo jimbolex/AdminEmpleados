@@ -108,8 +108,6 @@ namespace AdminEmpleados.PL
             if (dept.UpdateDept(RecoverInfo()))
             {
                 MessageBox.Show($"Record '{RecoverInfo().Departamento}' updated successfully");
-                txtDepto.Clear();
-                txtDeptoID.Clear();
                 getAllDepartments();
                 clearForm();
             }
