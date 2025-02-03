@@ -34,6 +34,8 @@ namespace AdminEmpleados.PL
             cmbDepto.DataSource = depto.getUniqueDepartments().Tables[0];
             cmbDepto.DisplayMember = "Departamento";
             cmbDepto.ValueMember = "ID";
+            cmbDepto.SelectedItem = null;
+            cmbDepto.SelectedText = "----------------------------------------------------------- Seleccione un Departamento -----------------------------------------------------------";
 
         }
         private void clearForm(bool clear = true)
@@ -80,7 +82,7 @@ namespace AdminEmpleados.PL
         {
             EmpleadoBLL Empleado = new EmpleadoBLL();
             int ID = 0; int.TryParse(txtID.Text, out ID);
-            int DeptoID = 0; int.TryParse(cmbDepto.ValueMember, out DeptoID);
+            int DeptoID = 0; int.TryParse(cmbDepto.SelectedValue.ToString(), out DeptoID);
             Empleado.ID = ID;
             Empleado.NombreEmpleado = txtNombres.Text;
             Empleado.PrimerApellido = txtPrimerApellido.Text;

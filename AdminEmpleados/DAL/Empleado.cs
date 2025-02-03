@@ -26,7 +26,32 @@ namespace AdminEmpleados.DAL
             cmd.Parameters.Add("@apellido2", SqlDbType.VarChar).Value = Empl.SegundoApellido;
             cmd.Parameters.Add("@correo", SqlDbType.VarChar).Value = Empl.Correo;
             cmd.Parameters.Add("@foto", SqlDbType.Image).Value = Empl.FotoEmpleado;
+
+            if (conn.execNonQuery(cmd))
+            {
+                int empID = this.getMaxEmployee().Tables[0].Rows[0].Field<int>(0); //obtain an specific field from a dataset.
+                return InsertEmplDept(empID, Empl.Departamento);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //version with a many-to-many relationship
+        private bool InsertEmplDept(int emplID, int depID)
+        {
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbEmpDep1].[dbo].[DepartamentoEmpleado] VALUES (@empID, @depID)");
+            cmd.Parameters.Add("@empID", SqlDbType.Int).Value = emplID;
+            cmd.Parameters.Add("@depID", SqlDbType.Int).Value = depID;
             return conn.execNonQuery(cmd);
+        }
+
+        private DataSet getMaxEmployee()
+        {
+            SqlCommand query = new SqlCommand("SELECT MAX(pkEmpId) FROM [dbEmpDep1].[dbo].[Empleados]");
+
+            return conn.execQuery(query);
         }
 
         public DataSet getAllEmployees()
