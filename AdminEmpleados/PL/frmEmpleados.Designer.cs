@@ -62,8 +62,10 @@
             // 
             // txtID
             // 
+            this.txtID.Enabled = false;
             this.txtID.Location = new System.Drawing.Point(226, 45);
             this.txtID.Name = "txtID";
+            this.txtID.ReadOnly = true;
             this.txtID.Size = new System.Drawing.Size(113, 20);
             this.txtID.TabIndex = 1;
             // 
@@ -153,6 +155,7 @@
             this.pbEmpFoto.Location = new System.Drawing.Point(29, 44);
             this.pbEmpFoto.Name = "pbEmpFoto";
             this.pbEmpFoto.Size = new System.Drawing.Size(159, 159);
+            this.pbEmpFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbEmpFoto.TabIndex = 12;
             this.pbEmpFoto.TabStop = false;
             // 
@@ -164,6 +167,7 @@
             this.btnExaminar.TabIndex = 13;
             this.btnExaminar.Text = "Examinar...";
             this.btnExaminar.UseVisualStyleBackColor = true;
+            this.btnExaminar.Click += new System.EventHandler(this.btnExaminar_Click);
             // 
             // btnAgregar
             // 
@@ -173,6 +177,7 @@
             this.btnAgregar.TabIndex = 14;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnModificar
             // 
@@ -182,6 +187,7 @@
             this.btnModificar.TabIndex = 15;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
@@ -191,6 +197,7 @@
             this.btnEliminar.TabIndex = 16;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnCancelar
             // 
@@ -200,14 +207,19 @@
             this.btnCancelar.TabIndex = 17;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // dgvEmpleados
             // 
+            this.dgvEmpleados.AllowUserToAddRows = false;
+            this.dgvEmpleados.AllowUserToDeleteRows = false;
+            this.dgvEmpleados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEmpleados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEmpleados.Location = new System.Drawing.Point(29, 259);
             this.dgvEmpleados.Name = "dgvEmpleados";
             this.dgvEmpleados.Size = new System.Drawing.Size(693, 179);
             this.dgvEmpleados.TabIndex = 18;
+            this.dgvEmpleados.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.selectRow);
             // 
             // frmEmpleados
             // 
@@ -235,6 +247,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmEmpleados";
             this.Text = "frmEmpleados";
+            this.Load += new System.EventHandler(this.frmEmpleados_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbEmpFoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).EndInit();
             this.ResumeLayout(false);

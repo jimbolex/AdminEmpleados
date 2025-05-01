@@ -22,7 +22,7 @@ namespace AdminEmpleados.DAL
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbEmpDep1].[dbo].[Departamentos] (departamento) VALUES (@depto)");
             cmd.Parameters.Add("@depto", SqlDbType.VarChar).Value = oDepartment.Departamento;
-            return conn.execNoDataRetCMD(cmd);
+            return conn.execNonQuery(cmd);
 
 
         }
@@ -34,12 +34,19 @@ namespace AdminEmpleados.DAL
             return conn.execQuery(query);
         }
 
+        public DataSet getUniqueDepartments()
+        {
+            SqlCommand query = new SqlCommand("SELECT distinct pkDepID as [ID], departamento as [Departamento] FROM [dbEmpDep1].[dbo].[Departamentos]");
+
+            return conn.execQuery(query);
+        }
+
         public bool DeleteDept(DepartamentoBLL oDepartment)
         {
             SqlCommand cmd = new SqlCommand("DELETE FROM [dbEmpDep1].[dbo].[Departamentos] WHERE pkDepID = @deptoID");
             cmd.Parameters.Add("@deptoID", SqlDbType.Int).Value = oDepartment.ID;
             return !String.IsNullOrEmpty(oDepartment.ID.ToString())
-                ? conn.execNoDataRetCMD(cmd)
+                ? conn.execNonQuery(cmd)
                 : false;
         }
 
@@ -49,7 +56,7 @@ namespace AdminEmpleados.DAL
             cmd.Parameters.Add("@deptoID", SqlDbType.Int).Value = oDepartment.ID;
             cmd.Parameters.Add("@depto", SqlDbType.VarChar).Value = oDepartment.Departamento;
             return !String.IsNullOrEmpty(oDepartment.ID.ToString())
-                ? conn.execNoDataRetCMD(cmd)
+                ? conn.execNonQuery(cmd)
                 : false;
         }
     }

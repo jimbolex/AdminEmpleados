@@ -54,6 +54,7 @@
             // 
             // txtDeptoID
             // 
+            this.txtDeptoID.Enabled = false;
             this.txtDeptoID.Location = new System.Drawing.Point(30, 45);
             this.txtDeptoID.Name = "txtDeptoID";
             this.txtDeptoID.ReadOnly = true;

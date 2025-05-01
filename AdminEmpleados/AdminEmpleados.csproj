@@ -51,6 +51,7 @@
     <Compile Include="BLL\EmpleadoBLL.cs" />
     <Compile Include="DAL\Conexion.cs" />
     <Compile Include="DAL\Departamento.cs" />
+    <Compile Include="DAL\Empleado.cs" />
     <Compile Include="dbEmpDep1DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
