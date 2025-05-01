@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AdminEmpleados.BLL;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AdminEmpleados.DAL
 {
@@ -60,6 +61,16 @@ namespace AdminEmpleados.DAL
 
             return conn.execQuery(query);
         }
+
+        public DataSet getEmployeesPic(int emplID)
+        {
+            SqlCommand query = new SqlCommand("SELECT foto FROM [dbEmpDep1].[dbo].[Empleados] WHERE pkEmpId = @empID");
+            query.Parameters.Add("@empID", SqlDbType.Int).Value=emplID;
+
+            return conn.execQuery(query);
+        }
+
+
 
         public bool DeleteEmp(EmpleadoBLL Empl)
         {

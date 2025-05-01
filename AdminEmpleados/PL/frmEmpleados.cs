@@ -119,15 +119,28 @@ namespace AdminEmpleados.PL
         {
             int i = e.RowIndex;
             dgvEmpleados.ClearSelection();
+            int empID;            
 
             if (i >= 0)
             {
-                txtID.Text = dgvEmpleados.Rows[i].Cells[0].Value.ToString();
+                empID = int.Parse(dgvEmpleados.Rows[i].Cells[0].Value.ToString());
+                imageByte = emp.getEmployeesPic(empID).Tables[0].Rows[0].Field<byte[]>(0);
+                txtID.Text =empID.ToString();
                 txtNombres.Text = dgvEmpleados.Rows[i].Cells[1].Value.ToString();
                 txtPrimerApellido.Text = dgvEmpleados.Rows[i].Cells[2].Value.ToString();
                 txtSegundoApellido.Text = dgvEmpleados.Rows[i].Cells[3].Value.ToString();
                 txtCorreo.Text = dgvEmpleados.Rows[i].Cells[4].Value.ToString();
+                pbEmpFoto.Image = EmpImage(imageByte);
                 clearForm(false);
+            }
+        }
+
+        private Image EmpImage(byte[] ImageValue)
+        {
+            using (MemoryStream memory = new MemoryStream(ImageValue))
+            {
+                Image img = Image.FromStream(memory);
+                return img;
             }
         }
 
