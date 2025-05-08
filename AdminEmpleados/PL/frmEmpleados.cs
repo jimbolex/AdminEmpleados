@@ -118,8 +118,8 @@ namespace AdminEmpleados.PL
         private void selectRow(object sender, DataGridViewCellMouseEventArgs e)
         {
             int i = e.RowIndex;
-            dgvEmpleados.ClearSelection();
-            int empID;            
+            int empID;
+            dgvEmpleados.ClearSelection();                      
 
             if (i >= 0)
             {
@@ -131,6 +131,8 @@ namespace AdminEmpleados.PL
                 txtSegundoApellido.Text = dgvEmpleados.Rows[i].Cells[3].Value.ToString();
                 txtCorreo.Text = dgvEmpleados.Rows[i].Cells[4].Value.ToString();
                 pbEmpFoto.Image = EmpImage(imageByte);
+                cmbDepto.ResetText();
+                cmbDepto.SelectedText = emp.getEmployeesDept(empID).Tables[0].Rows[0].Field<string>(0);
                 clearForm(false);
             }
         }

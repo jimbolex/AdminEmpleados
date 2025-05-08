@@ -70,7 +70,16 @@ namespace AdminEmpleados.DAL
             return conn.execQuery(query);
         }
 
+        public DataSet getEmployeesDept(int emplID)
+        {
+            SqlCommand query = new SqlCommand("SELECT A.departamento FROM [dbEmpDep1].[dbo].[Departamentos] A with (nolock) " +
+                "JOIN [dbEmpDep1].[dbo].[DepartamentoEmpleado] B with (nolock) " +
+                "ON A.pkDepID = B.fkDeptId " +
+                "WHERE B.fkEmpId = @empID");
+            query.Parameters.Add("@empID", SqlDbType.Int).Value = emplID;
 
+            return conn.execQuery(query);
+        }
 
         public bool DeleteEmp(EmpleadoBLL Empl)
         {
