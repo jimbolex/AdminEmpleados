@@ -118,16 +118,43 @@ namespace AdminEmpleados.PL
         private void selectRow(object sender, DataGridViewCellMouseEventArgs e)
         {
             int i = e.RowIndex;
-            dgvEmpleados.ClearSelection();
+            int empID;
+            dgvEmpleados.ClearSelection();                      
 
             if (i >= 0)
             {
-                txtID.Text = dgvEmpleados.Rows[i].Cells[0].Value.ToString();
+                empID = int.Parse(dgvEmpleados.Rows[i].Cells[0].Value.ToString());
+                imageByte = emp.getEmployeesPic(empID).Tables[0].Rows[0].Field<byte[]>(0);
+                txtID.Text =empID.ToString();
                 txtNombres.Text = dgvEmpleados.Rows[i].Cells[1].Value.ToString();
                 txtPrimerApellido.Text = dgvEmpleados.Rows[i].Cells[2].Value.ToString();
                 txtSegundoApellido.Text = dgvEmpleados.Rows[i].Cells[3].Value.ToString();
                 txtCorreo.Text = dgvEmpleados.Rows[i].Cells[4].Value.ToString();
-                clearForm(false);
+                pbEmpFoto.Image = EmpImage(imageByte);
+                cmbDepto.ResetText();
+                try
+                {
+                    cmbDepto.SelectedText = emp.getEmployeesDept(empID).Tables[0].Rows[0].Field<string>(0);
+                    
+                }
+                catch (Exception)
+                {
+                    cmbDepto.SelectedText = "----------------------------------------------------------- Seleccione un Departamento -----------------------------------------------------------";
+                }
+                finally
+                {
+                    clearForm(false);
+                }
+                
+            }
+        }
+
+        private Image EmpImage(byte[] ImageValue)
+        {
+            using (MemoryStream memory = new MemoryStream(ImageValue))
+            {
+                Image img = Image.FromStream(memory);
+                return img;
             }
         }
 
