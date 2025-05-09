@@ -132,8 +132,20 @@ namespace AdminEmpleados.PL
                 txtCorreo.Text = dgvEmpleados.Rows[i].Cells[4].Value.ToString();
                 pbEmpFoto.Image = EmpImage(imageByte);
                 cmbDepto.ResetText();
-                cmbDepto.SelectedText = emp.getEmployeesDept(empID).Tables[0].Rows[0].Field<string>(0);
-                clearForm(false);
+                try
+                {
+                    cmbDepto.SelectedText = emp.getEmployeesDept(empID).Tables[0].Rows[0].Field<string>(0);
+                    
+                }
+                catch (Exception)
+                {
+                    cmbDepto.SelectedText = "----------------------------------------------------------- Seleccione un Departamento -----------------------------------------------------------";
+                }
+                finally
+                {
+                    clearForm(false);
+                }
+                
             }
         }
 
